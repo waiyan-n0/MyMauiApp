@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyMauiApp.Views.AppointmentPage"
+             Title="Appointment"
+             BackgroundColor="#F5F6FA">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" HorizontalOptions="Center">
+            
+            <!-- Card container -->
+            <Frame WidthRequest="400" BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="True">
+
+                <VerticalStackLayout Spacing="20">
+
+                    <!-- Progress Bar -->
+                    <Grid ColumnDefinitions="Auto,*,Auto,*,Auto" VerticalOptions="Center">
+                        <!-- Step 1 -->
+                        <Frame x:Name="Step1Box" WidthRequest="30" HeightRequest="30" CornerRadius="15" BackgroundColor="Green" HorizontalOptions="Center">
+                            <Label Text="1" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
+                        </Frame>
+                        <BoxView Grid.Column="1" HeightRequest="2" BackgroundColor="Green" VerticalOptions="Center"/>
+                        
+                        <!-- Step 2 -->
+                        <Frame x:Name="Step2Box" Grid.Column="2" WidthRequest="30" HeightRequest="30" CornerRadius="15" BackgroundColor="LightGray" HorizontalOptions="Center">
+                            <Label Text="2" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                        </Frame>
+                        <BoxView Grid.Column="3" HeightRequest="2" BackgroundColor="LightGray" VerticalOptions="Center"/>
+
+                        <!-- Step 3 -->
+                        <Frame x:Name="Step3Box" Grid.Column="4" WidthRequest="30" HeightRequest="30" CornerRadius="15" BackgroundColor="LightGray" HorizontalOptions="Center">
+                            <Label Text="3" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                        </Frame>
+                    </Grid>
+
+                    <!-- Step 1: Details -->
+                    <Label Text="Customer and Schedule" FontSize="16" FontAttributes="Bold" TextColor="Black" />
+
+                    <!-- Two Column Layout -->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+
+                        <!-- Customer Info -->
+                        <VerticalStackLayout Grid.Column="0" Spacing="8">
+                            <Entry x:Name="NameEntry" Placeholder="Full Name" TextColor="Black" PlaceholderColor="Gray"
+                                   BackgroundColor="#F9F9F9" HeightRequest="42"/>
+                            <Entry x:Name="AddressEntry" Placeholder="Address" TextColor="Black" PlaceholderColor="Gray"
+                                   BackgroundColor="#F9F9F9" HeightRequest="42"/>
+                            <Entry x:Name="PhoneEntry" Placeholder="Phone Number" Keyboard="Telephone" TextColor="Black" PlaceholderColor="Gray"
+                                   BackgroundColor="#F9F9F9" HeightRequest="42"/>
+
+                            <!-- Licence Switch -->
+                            <Frame Padding="10" CornerRadius="8" BackgroundColor="#F9F9F9" BorderColor="#DDDDDD">
+                                <HorizontalStackLayout>
+                                    <Label Text="Has Licence?" TextColor="Black" VerticalOptions="Center"/>
+                                    <Switch x:Name="LicenceSwitch" HorizontalOptions="EndAndExpand"/>
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </VerticalStackLayout>
+
+                        <!-- Schedule Info -->
+                        <VerticalStackLayout Grid.Column="1" Spacing="8">
+                            <DatePicker x:Name="StartDate" TextColor="Black" BackgroundColor="#F9F9F9" HeightRequest="42"/>
+                            <TimePicker x:Name="StartTime" TextColor="Black" BackgroundColor="#F9F9F9" HeightRequest="42"/>
+                            <DatePicker x:Name="EndDate" TextColor="Black" BackgroundColor="#F9F9F9" HeightRequest="42"/>
+                            <TimePicker x:Name="EndTime" TextColor="Black" BackgroundColor="#F9F9F9" HeightRequest="42"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!-- Step 2: Licence Photo -->
+                    <Frame x:Name="LicencePhotoFrame" IsVisible="False" Padding="15" CornerRadius="8" BorderColor="#DDDDDD" BackgroundColor="#F9F9F9">
+                        <VerticalStackLayout>
+                            <Label Text="Upload Licence Photo" TextColor="Black" FontAttributes="Bold"/>
+                            <Button Text="Choose File" BackgroundColor="Green" TextColor="White" CornerRadius="6"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Step 2: Driver Option -->
+                    <Frame x:Name="DriverFrame" IsVisible="False" Padding="10" CornerRadius="8" BorderColor="#DDDDDD" BackgroundColor="#F9F9F9">
+                        <HorizontalStackLayout>
+                            <Label Text="Require Driver?" FontSize="14" TextColor="Black" VerticalOptions="Center"/>
+                            <Switch x:Name="DriverSwitch" HorizontalOptions="EndAndExpand"/>
+                        </HorizontalStackLayout>
+                    </Frame>
+
+                    <!-- Step 3: Payment -->
+                    <Frame x:Name="PaymentFrame" IsVisible="False" Padding="15" CornerRadius="8" BorderColor="#DDDDDD" BackgroundColor="#F9F9F9">
+                        <VerticalStackLayout>
+                            <Label Text="Payment Method" TextColor="Black" FontAttributes="Bold"/>
+                            <Picker>
+                                <Picker.Items>
+                                    <x:String>Credit Card</x:String>
+                                    <x:String>PayPal</x:String>
+                                    <x:String>Cash</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Submit -->
+                    <Button x:Name="SubmitButton" 
+                            Text="Continue" 
+                            BackgroundColor="Green" 
+                            TextColor="White" 
+                            CornerRadius="8"
+                            HeightRequest="45"/>
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

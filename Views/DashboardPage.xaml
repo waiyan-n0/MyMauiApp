@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyMauiApp.Views.DashboardPage"
+             Title="Dashboard"
+             BackgroundColor="#F9FAFB">
+
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="200,*">
+        <!-- Top Navigation Bar with Bottom Border -->
+        
+            <Grid BackgroundColor="#514390" HeightRequest="60" VerticalOptions="Start" Grid.Row="0" Grid.ColumnSpan="2"
+                  Padding="0" Margin="0,0,0,0">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Car Rental Management System" VerticalOptions="Center" TextColor="white" FontSize="20" Margin="20,0" />
+                <Label x:Name="TimeLabel" Grid.Column="1" VerticalOptions="Center" TextColor="#FFFFFF" FontSize="16" Margin="0,0,20,0" />
+                <Image Source="dotnet_bot.png" Grid.Column="2" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" Margin="0,0,20,0" />
+            </Grid>
+
+
+        <!-- Sidebar with Hover Buttons -->
+        <VerticalStackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="#6E5CC2" Spacing="10" Padding="0,20">
+            <Button Text="Dashboard" Clicked="OnDashboardClicked" Style="{StaticResource SidebarButtonStyle}" />
+            <Button Text="Appointment" Clicked="OnAppointmentClicked" Style="{StaticResource SidebarButtonStyle}"/>
+            <Button Text="Customer" Clicked="OnCustomerClicked" Style="{StaticResource SidebarButtonStyle}"/>
+            <Button Text="Vehicles" Clicked="OnVehiclesClicked" Style="{StaticResource SidebarButtonStyle}"/>
+            <Button Text="Rental Lists" Clicked="OnRentalListsClicked" Style="{StaticResource SidebarButtonStyle}"/>
+            <Button Text="Maintenance" Clicked="OnMaintenanceClicked" Style="{StaticResource SidebarButtonStyle}"/>
+            <Button Text="Logout" Clicked="OnLogoutClicked" Style="{StaticResource SidebarButtonStyle}"/>
+        </VerticalStackLayout>
+
+        <!-- Main Content Area -->
+        <ContentView x:Name="ContentArea" Grid.Row="1" Grid.Column="1"
+                     Padding="20" BackgroundColor="White">
+            <Label Text="Welcome to the Dashboard!" FontSize="24"
+                   VerticalOptions="Center" HorizontalOptions="Center"/>
+        </ContentView>
+
+    </Grid>
+</ContentPage>

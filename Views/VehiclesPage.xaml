@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyMauiApp.Views.VehiclesPage"
+             Title="Vehicles"
+             BackgroundColor="#F5F6FA">
+
+    <Grid RowDefinitions="Auto,*" Padding="20">
+
+        <!-- Header with Title -->
+        <Label Grid.Row="0" 
+               Text="Vehicles" 
+               TextColor="Black" 
+               FontSize="22" 
+               FontAttributes="Bold" 
+               VerticalOptions="Center" 
+               Margin="0,0,0,10"/>
+
+        <!-- Table -->
+        <CollectionView x:Name="VehiclesCollectionView" Grid.Row="1" ItemsSource="{Binding}">
+
+            <!-- Table Header -->
+            <CollectionView.Header>
+                <Frame Padding="0" Margin="0,0,0,1" BorderColor="Black" CornerRadius="5" HasShadow="True" BackgroundColor="White">
+                    <Grid Padding="10" ColumnDefinitions="50,150,150,150,150,150">
+                        <Label Text="No" Grid.Column="0" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Model" Grid.Column="1" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Brand" Grid.Column="2" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Licence Plate" Grid.Column="3" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Car ID" Grid.Column="4" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Price/Hour" Grid.Column="5" FontAttributes="Bold" TextColor="Black"/>
+                    </Grid>
+                </Frame>
+            </CollectionView.Header>
+
+            <!-- Table Rows -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" ColumnDefinitions="50,150,150,150,150,150" BackgroundColor="White" Margin="0,1,0,1">
+                        <Label Text="{Binding No}" Grid.Column="0" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding Model}" Grid.Column="1" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding Brand}" Grid.Column="2" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding LicencePlate}" Grid.Column="3" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding CarId}" Grid.Column="4" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding PricePerHour}" Grid.Column="5" VerticalOptions="Center" TextColor="Black"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

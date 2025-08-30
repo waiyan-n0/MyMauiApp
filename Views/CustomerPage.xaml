@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyMauiApp.Views.CustomerPage"
+             Title="Customers"
+             BackgroundColor="#F5F6FA">
+
+    <Grid RowDefinitions="Auto,*" Padding="20">
+
+        <!-- Header with Title -->
+        <Label Grid.Row="0" Text="Customers" TextColor="Black" FontSize="22" FontAttributes="Bold" VerticalOptions="Center" Margin="0,0,0,10"/>
+        <!-- Table -->
+        <CollectionView x:Name="CustomerCollection" Grid.Row="1" ItemsSource="{Binding}">
+            <!-- Table Header -->
+            <CollectionView.Header>
+                <Frame Padding="0" Margin="0,0,0,1" BorderColor="Black" CornerRadius="5" HasShadow="True" BackgroundColor="White">
+                    <Grid Padding="10" ColumnDefinitions="50,150,150,*,100">
+                        <Label Text="No" Grid.Column="0" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Name" Grid.Column="1" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Phone" Grid.Column="2" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Address" Grid.Column="3" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Action" Grid.Column="4" FontAttributes="Bold" TextColor="Black"/>
+                    </Grid>
+                </Frame>
+
+            </CollectionView.Header>
+
+            <!-- Table Rows -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" ColumnDefinitions="50,150,150,*,100" BackgroundColor="White" Margin="0,1,0,1">
+                        <Label Text="{Binding No}" Grid.Column="0" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding Name}" Grid.Column="1" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding PhoneNumber}" Grid.Column="2" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding Address}" Grid.Column="3" VerticalOptions="Center" TextColor="Black"/>
+                        
+                        <HorizontalStackLayout Grid.Column="4" Spacing="10" HorizontalOptions="Center">
+                            <Button Text="✏️" WidthRequest="30" HeightRequest="30" CornerRadius="15" BackgroundColor="#E8E8E8"/>
+                            <Button Text="🗑️" WidthRequest="30" HeightRequest="30" CornerRadius="15" BackgroundColor="#FFDDDD"/>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
