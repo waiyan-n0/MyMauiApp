@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MyMauiApp.Converters"
              x:Class="MyMauiApp.Views.VehiclesPage"
              Title="Vehicles"
              BackgroundColor="#F5F6FA">
+<ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Define the StatusColorConverter -->
+            <local:StatusColorConverter x:Key="StatusColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="Auto,*" Padding="20">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="20">
         <!-- Header with Title -->
         <Label Grid.Row="0" 
                Text="Vehicles" 
@@ -14,11 +21,9 @@
                FontAttributes="Bold" 
                VerticalOptions="Center" 
                Margin="0,0,0,10"/>
-
-        <!-- Search Bar and Add Vehicle Button Container -->
-        <HorizontalStackLayout Grid.Row="1" Spacing="100" Margin="0,0,0,20">
+        <HorizontalStackLayout Grid.Row="0" Spacing="100" Margin="0,0,0,20">
             <SearchBar x:Name="VehicleSearchBar" 
-                       Placeholder="Search vehicles by model, brand..." 
+                       Placeholder="Search vehicles by model, brand..."  
                        TextChanged="OnSearchTextChanged" 
                        VerticalOptions="Center" 
                        BackgroundColor="#6E5CC2" 
@@ -29,17 +34,11 @@
                     CornerRadius="8" 
                     HeightRequest="20" 
                     Padding="8" 
-                    FontSize="14" 
-                    Clicked="OnAddVehicleClicked" 
+                    FontSize="14"  
                     HorizontalOptions="End" />
         </HorizontalStackLayout>
-
-        <!-- Table for Vehicles -->
-        <CollectionView x:Name="VehiclesCollectionView" 
-                Grid.Row="2" 
-                ItemsSource="{Binding vehicles}" 
-                VerticalOptions="FillAndExpand">
-
+        <!-- Table -->
+        <CollectionView x:Name="VehiclesCollectionView" Grid.Row="2" ItemsSource="{Binding}">
 
             <!-- Table Header -->
             <CollectionView.Header>
@@ -58,31 +57,27 @@
 
             <!-- Table Rows -->
             <CollectionView.ItemTemplate>
-    <DataTemplate>
-        <Grid Padding="10" ColumnDefinitions="50,150,150,150,150,150,150" BackgroundColor="White" Margin="0,1,0,1">
-            <!-- Binding the properties of the Vehicle class -->
-            <Label Text="{Binding No}" Grid.Column="0" VerticalOptions="Center" TextColor="Black"/>
-            <Label Text="{Binding Model}" Grid.Column="1" VerticalOptions="Center" TextColor="Black"/>
-            <Label Text="{Binding Brand}" Grid.Column="2" VerticalOptions="Center" TextColor="Black"/>
-            <Label Text="{Binding LicencePlate}" Grid.Column="3" VerticalOptions="Center" TextColor="Black"/>
-            <Label Text="{Binding CarId}" Grid.Column="4" VerticalOptions="Center" TextColor="Black"/>
-            <Label Text="{Binding PricePerHour}" Grid.Column="5" VerticalOptions="Center" TextColor="Black"/>
-
-            <!-- Status with color binding -->
-            <Label Grid.Column="6" VerticalOptions="Center" TextColor="White" Padding="5">
-                <Label.BackgroundColor>
-                    <OnPlatform x:TypeArguments="Color">
-                        <On Platform="Android" Value="{Binding Status, Converter={StaticResource StatusColorConverter}}" />
-                        <On Platform="iOS" Value="{Binding Status, Converter={StaticResource StatusColorConverter}}" />
-                        <On Platform="UWP" Value="{Binding Status, Converter={StaticResource StatusColorConverter}}" />
-                    </OnPlatform>
-                </Label.BackgroundColor>
-                <Label.Text>{Binding Status}</Label.Text>
-            </Label>
-        </Grid>
-    </DataTemplate>
-</CollectionView.ItemTemplate>
-
+                <DataTemplate>
+                    <Grid Padding="10" ColumnDefinitions="50,150,150,150,150,150,150" BackgroundColor="White" Margin="0,1,0,1">
+                        <Label Text="{Binding No}" Grid.Column="0" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding Model}" Grid.Column="1" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding Brand}" Grid.Column="2" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding LicencePlate}" Grid.Column="3" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding CarId}" Grid.Column="4" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding PricePerHour}" Grid.Column="5" VerticalOptions="Center" TextColor="Black"/>
+                        <Label Grid.Column="6" VerticalOptions="Center" TextColor="White" Padding="5">
+                        <Label.BackgroundColor>
+                                <!-- Use the StatusColorConverter for dynamic background -->
+                                <OnPlatform x:TypeArguments="Color">
+                                    <On Platform="Windows" Value="{Binding Status, Converter={StaticResource StatusColorConverter}}" />
+                                </OnPlatform>
+                            </Label.BackgroundColor>
+                            <!-- Bind the status text -->
+                            <Label.Text>{Binding Status}</Label.Text>
+                        </Label> 
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
         </CollectionView>
     </Grid>
 </ContentPage>

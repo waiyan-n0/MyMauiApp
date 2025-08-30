@@ -2,33 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Maui.Controls;
-
 namespace MyMauiApp.Views
 {
     public partial class VehiclesPage : ContentPage
     {
-        // Vehicles list to hold the vehicle data
         public List<Vehicle> vehicles { get; set; } = new List<Vehicle>();
-
-
         public VehiclesPage()
-{
-    InitializeComponent();
-
-            vehicles.Add(new Vehicle { No = 1, Model = "Corolla", Brand = "Toyota", LicencePlate = "YGN-1234", CarId = "C001", PricePerHour = 20, Status = "Available" });
-            vehicles.Add(new Vehicle { No = 2, Model = "Civic", Brand = "Honda", LicencePlate = "MDY-5678", CarId = "C002", PricePerHour = 25, Status = "On Rent" });
-            vehicles.Add(new Vehicle { No = 3, Model = "Elantra", Brand = "Hyundai", LicencePlate = "NPT-9012", CarId = "C003", PricePerHour = 22, Status = "Maintenance" });
-            this.BindingContext = this;  // Set the BindingContext to the current page
-}
-
-
-
-        // Method to load vehicle data
-
-
-
-
-        // Filter vehicles based on the search bar
+        {
+            InitializeComponent();
+            LoadVehicles();
+        }
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
             var searchText = VehicleSearchBar.Text.ToLower();
@@ -41,24 +24,27 @@ namespace MyMauiApp.Views
 
             VehiclesCollectionView.ItemsSource = filteredVehicles;
         }
-
-        // Add Vehicle button clicked
-        private async void OnAddVehicleClicked(object sender, EventArgs e)
+        private void LoadVehicles()
         {
-            await DisplayAlert("Add Vehicle", "This is where you can add a new vehicle.", "OK");
+            var vehicles = new List<Vehicle>
+            {
+                new Vehicle { No = 1, Model = "Corolla", Brand = "Toyota", LicencePlate = "YGN-1234", CarId = "C001", PricePerHour = 20,Status = "Maintenance" },
+                new Vehicle { No = 2, Model = "Civic", Brand = "Honda", LicencePlate = "MDY-5678", CarId = "C002", PricePerHour = 25,Status = "Maintenance" },
+                new Vehicle { No = 3, Model = "Elantra", Brand = "Hyundai", LicencePlate = "NPT-9012", CarId = "C003", PricePerHour = 22 ,Status = "Maintenance"},
+            };
+
+            VehiclesCollectionView.ItemsSource = vehicles;
         }
 
-        // Vehicle class to represent the vehicle data
         public class Vehicle
-{
-    public int No { get; set; }
-    public string Model { get; set; }
-    public string Brand { get; set; }
-    public string LicencePlate { get; set; }
-    public string CarId { get; set; }
-    public double PricePerHour { get; set; }
-    public string Status { get; set; }
-}
-
+        {
+            public int No { get; set; }
+            public string Model { get; set; } = string.Empty;
+            public string Brand { get; set; } = string.Empty;
+            public string LicencePlate { get; set; } = string.Empty;
+            public string CarId { get; set; } = string.Empty;
+            public decimal PricePerHour { get; set; }
+            public string Status { get; set; } = string.Empty;
+        }
     }
 }
